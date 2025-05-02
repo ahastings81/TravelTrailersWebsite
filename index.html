@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel Trailers Sales and Service</title>
-  
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  
+
   <!-- Font Awesome for social icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -84,6 +84,36 @@
       max-width: 300px;
       text-align: center;
     }
+
+    .photo-reel {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .reel-image {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .reel-controls {
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    .reel-controls button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+      background: #002244;
+      color: white;
+      border: none;
+    }
+
     footer {
       background: #002244;
       color: white;
@@ -100,48 +130,40 @@
     .social-icons a:hover {
       color: #ffcc00;
     }
-	@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    text-align: center;
-  }
 
-  nav {
-    margin-top: 1rem;
-  }
-
-  nav a {
-    display: block;
-    margin: 0.5rem 0;
-  }
-
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .brand-logos {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .brand-logos img {
-    max-width: 40%;
-  }
-
-  .brand-logos a {
-    font-size: 2.5rem;
-  }
-}
-
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav {
+        margin-top: 1rem;
+      }
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .brand-logos {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .brand-logos img {
+        max-width: 40%;
+      }
+      .brand-logos a {
+        font-size: 2.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -151,7 +173,7 @@
       <a href="#">Home</a>
       <a href="CamperInventory.html?type=new">New RVs</a>
       <a href="CamperInventory.html?type=used">Used RVs</a>
-	  <a href="storage-buildings.html">Storage Buildings</a>
+      <a href="storage-buildings.html">Storage Buildings</a>
       <a href="#">Services</a>
       <a href="#">Parts</a>
       <a href="#">Contact</a>
@@ -164,28 +186,41 @@
     <img src="DiscoverTheUsa.jpg" alt="Travel Trailer" style="max-width: 100%; height: auto; margin-top: 20px; margin-bottom: 20px;">
     <button class="btn">Browse Inventory</button>
   </section>
-  
-  <section class="brand-bar">
-  <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; margin: 2rem 0;">
-  <img src="jayco-seeklogo.png" alt="Jayco Logo" style="height: 60px;">
-  <img src="gulf-stream.png" alt="Gulf Stream Logo" style="height: 60px;">
-  <a href="https://www.facebook.com/Travel.Trailers.Sales/?ref=aymt_homepage_panel" target="_blank" aria-label="Facebook">
-    <i class="fab fa-facebook" style="font-size: 60px; color: #002244;"></i>
-  </a>
-</div>
 
-</section>
+  <section class="brand-bar">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; margin: 2rem 0;">
+      <img src="jayco-seeklogo.png" alt="Jayco Logo" style="height: 60px;">
+      <img src="gulf-stream.png" alt="Gulf Stream Logo" style="height: 60px;">
+      <a href="https://www.facebook.com/Travel.Trailers.Sales/?ref=aymt_homepage_panel" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook" style="font-size: 60px; color: #002244;"></i>
+      </a>
+    </div>
+  </section>
 
   <section class="section">
     <h2>Our Featured Campers</h2>
     <div class="cards">
+      <!-- Card 1 -->
       <div class="card">
-        <img src="camper1.jpg" alt="Camper 1" style="width: 100%; border-radius: 8px;">
+        <div class="photo-reel">
+          <img id="camper1" class="reel-image" src="camper1a.jpg" alt="Jayco Eagle">
+          <div class="reel-controls">
+            <button onclick="prevImage(0)">&#8592;</button>
+            <button onclick="nextImage(0)">&#8594;</button>
+          </div>
+        </div>
         <h3>2024 Jayco Eagle</h3>
         <p>Luxury, space, and comfort all in one package. Contact us to schedule a tour.</p>
       </div>
+      <!-- Card 2 -->
       <div class="card">
-        <img src="camper2.jpg" alt="Camper 2" style="width: 100%; border-radius: 8px;">
+        <div class="photo-reel">
+          <img id="camper2" class="reel-image" src="camper2a.jpg" alt="Gulf Stream Vista">
+          <div class="reel-controls">
+            <button onclick="prevImage(1)">&#8592;</button>
+            <button onclick="nextImage(1)">&#8594;</button>
+          </div>
+        </div>
         <h3>2023 Gulf Stream Vista</h3>
         <p>Perfect for weekend getaways. Affordable and reliable.</p>
       </div>
@@ -198,5 +233,23 @@
       <a href="https://www.facebook.com/Travel.Trailers.Sales/?ref=aymt_homepage_panel" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
     </div>
   </footer>
+
+  <script>
+    const images = [
+      ["camper1a.jpg", "camper1b.jpg", "camper1c.jpg"],
+      ["camper2a.jpg", "camper2b.jpg", "camper2c.jpg"]
+    ];
+    const current = [0, 0];
+
+    function nextImage(index) {
+      current[index] = (current[index] + 1) % images[index].length;
+      document.getElementById(`camper${index + 1}`).src = images[index][current[index]];
+    }
+
+    function prevImage(index) {
+      current[index] = (current[index] - 1 + images[index].length) % images[index].length;
+      document.getElementById(`camper${index + 1}`).src = images[index][current[index]];
+    }
+  </script>
 </body>
 </html>
