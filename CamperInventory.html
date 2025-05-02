@@ -42,9 +42,10 @@
     <label><input type="checkbox" class="filter-type" value="Travel Trailer"> Travel Trailer</label><br>
     <label><input type="checkbox" class="filter-type" value="Fifth Wheel"> Fifth Wheel</label><br>
     <label><input type="checkbox" class="filter-type" value="Motorhome"> Motorhome</label><br>
-	<label><input type="checkbox" class="filter-type" value="Toy Haulers"> Toy Haulers</label><br>
-	
+    <label><input type="checkbox" class="filter-type" value="Toy Haulers"> Toy Haulers</label><br>
+
     <h3>Features</h3>
+    <!-- (unchanged) -->
     <label><input type="checkbox" class="filter-feature" value="Outside Kitchen"> Outside Kitchen</label><br>
     <label><input type="checkbox" class="filter-feature" value="Outside Entertainment"> Outside Entertainment</label><br>
     <label><input type="checkbox" class="filter-feature" value="Front Living room"> Front Living room</label><br>
@@ -58,21 +59,30 @@
     <label><input type="checkbox" class="filter-feature" value="Washer/Dryer"> Washer/Dryer</label><br>
 
     <h3>Sleeps</h3>
+    <!-- (unchanged) -->
     <label><input type="radio" name="sleeps" class="filter-sleeps" value="2"> Up to 2</label><br>
     <label><input type="radio" name="sleeps" class="filter-sleeps" value="4"> Up to 4</label><br>
     <label><input type="radio" name="sleeps" class="filter-sleeps" value="6"> Up to 6</label><br>
     <label><input type="radio" name="sleeps" class="filter-sleeps" value="7+"> 7+</label><br>
 
     <h3>Length</h3>
+    <!-- (unchanged) -->
     <label><input type="radio" name="length" class="filter-length" value="21"> Up to 21 ft</label><br>
     <label><input type="radio" name="length" class="filter-length" value="34"> 21–34 ft</label><br>
     <label><input type="radio" name="length" class="filter-length" value="35+"> 34+ ft</label><br>
 
     <h3>Weight</h3>
+    <!-- (unchanged) -->
     <label><input type="radio" name="weight" class="filter-weight" value="3000"> Up to 3,000 lbs</label><br>
     <label><input type="radio" name="weight" class="filter-weight" value="5000"> 3,000–5,000 lbs</label><br>
     <label><input type="radio" name="weight" class="filter-weight" value="7000"> 5,000–7,000 lbs</label><br>
     <label><input type="radio" name="weight" class="filter-weight" value="7001+"> 7,000+ lbs</label><br>
+
+    <h3>Price</h3>
+    <label><input type="radio" name="price" class="filter-price" value="20000"> Under $20,000</label><br>
+    <label><input type="radio" name="price" class="filter-price" value="40000"> $20,000–$40,000</label><br>
+    <label><input type="radio" name="price" class="filter-price" value="60000"> $40,000–$60,000</label><br>
+    <label><input type="radio" name="price" class="filter-price" value="60001+"> Over $60,000</label><br>
 
     <button onclick="resetFilters()">Reset Filters</button>
   </div>
@@ -81,9 +91,9 @@
 
   <script>
     const campers = [
-      { name: "Jayco Eagle", type: "Fifth Wheel", sleeps: 4, length: 30, weight: 7200, features: ["Awning", "King Bed", "Bathroom"] },
-      { name: "Gulf Stream Vintage", type: "Travel Trailer", sleeps: 2, length: 20, weight: 2800, features: ["Awning"] },
-      { name: "Jay Flight", type: "Travel Trailer", sleeps: 6, length: 32, weight: 4500, features: ["Bathroom", "Awning"] }
+      { name: "Jayco Eagle", type: "Fifth Wheel", sleeps: 4, length: 30, weight: 7200, price: 55000, features: ["Awning", "King Bed", "Bathroom"] },
+      { name: "Gulf Stream Vintage", type: "Travel Trailer", sleeps: 2, length: 20, weight: 2800, price: 18000, features: ["Awning"] },
+      { name: "Jay Flight", type: "Travel Trailer", sleeps: 6, length: 32, weight: 4500, price: 35000, features: ["Bathroom", "Awning"] }
     ];
 
     const resultDiv = document.getElementById('results');
@@ -93,12 +103,10 @@
     const sleepRadios = document.querySelectorAll('.filter-sleeps');
     const lengthRadios = document.querySelectorAll('.filter-length');
     const weightRadios = document.querySelectorAll('.filter-weight');
+    const priceRadios = document.querySelectorAll('.filter-price');
 
-    typeCheckboxes.forEach(cb => cb.addEventListener('change', filterCampers));
-    featureCheckboxes.forEach(cb => cb.addEventListener('change', filterCampers));
-    sleepRadios.forEach(rb => rb.addEventListener('change', filterCampers));
-    lengthRadios.forEach(rb => rb.addEventListener('change', filterCampers));
-    weightRadios.forEach(rb => rb.addEventListener('change', filterCampers));
+    [...typeCheckboxes, ...featureCheckboxes, ...sleepRadios, ...lengthRadios, ...weightRadios, ...priceRadios]
+      .forEach(input => input.addEventListener('change', filterCampers));
 
     function filterCampers() {
       const selectedTypes = Array.from(typeCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
@@ -106,26 +114,31 @@
       const selectedSleeps = Array.from(sleepRadios).find(rb => rb.checked)?.value;
       const selectedLength = Array.from(lengthRadios).find(rb => rb.checked)?.value;
       const selectedWeight = Array.from(weightRadios).find(rb => rb.checked)?.value;
+      const selectedPrice = Array.from(priceRadios).find(rb => rb.checked)?.value;
 
       const filtered = campers.filter(camper => {
         const matchType = selectedTypes.length === 0 || selectedTypes.includes(camper.type);
         const matchSleeps = !selectedSleeps || (selectedSleeps === '7+' ? camper.sleeps >= 7 : camper.sleeps <= parseInt(selectedSleeps));
         const matchFeatures = selectedFeatures.every(f => camper.features.includes(f));
-        
         const matchLength = !selectedLength || (
           selectedLength === '21' ? camper.length <= 21 :
           selectedLength === '34' ? camper.length > 21 && camper.length <= 34 :
           selectedLength === '35+' ? camper.length > 34 : true
         );
-
         const matchWeight = !selectedWeight || (
           selectedWeight === '3000' ? camper.weight <= 3000 :
           selectedWeight === '5000' ? camper.weight > 3000 && camper.weight <= 5000 :
           selectedWeight === '7000' ? camper.weight > 5000 && camper.weight <= 7000 :
           selectedWeight === '7001+' ? camper.weight > 7000 : true
         );
+        const matchPrice = !selectedPrice || (
+          selectedPrice === '20000' ? camper.price < 20000 :
+          selectedPrice === '40000' ? camper.price >= 20000 && camper.price <= 40000 :
+          selectedPrice === '60000' ? camper.price > 40000 && camper.price <= 60000 :
+          selectedPrice === '60001+' ? camper.price > 60000 : true
+        );
 
-        return matchType && matchSleeps && matchFeatures && matchLength && matchWeight;
+        return matchType && matchSleeps && matchFeatures && matchLength && matchWeight && matchPrice;
       });
 
       displayResults(filtered);
@@ -140,6 +153,7 @@
               <p>Sleeps: ${c.sleeps}</p>
               <p>Length: ${c.length} ft</p>
               <p>Weight: ${c.weight} lbs</p>
+              <p>Price: $${c.price.toLocaleString()}</p>
               <p>Features: ${c.features.join(', ')}</p>
             </div>
           `).join('')
@@ -147,8 +161,8 @@
     }
 
     function resetFilters() {
-      [...typeCheckboxes, ...featureCheckboxes].forEach(cb => cb.checked = false);
-      [...sleepRadios, ...lengthRadios, ...weightRadios].forEach(rb => rb.checked = false);
+      [...typeCheckboxes, ...featureCheckboxes, ...sleepRadios, ...lengthRadios, ...weightRadios, ...priceRadios]
+        .forEach(input => input.checked = false);
       displayResults(campers);
     }
 
