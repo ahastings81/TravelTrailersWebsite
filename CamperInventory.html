@@ -22,14 +22,58 @@
     }
 
     .camper {
+      display: flex;
       border: 1px solid #ccc;
       padding: 10px;
       margin: 10px 0;
       background: white;
     }
 
+    .camper-info {
+      width: 40%; /* 40% for camper information */
+      padding-right: 20px;
+    }
+
     h3 {
       margin-top: 1.5em;
+    }
+
+    /* Canvas for Photo Reel */
+    .photo-reel-container {
+      width: 60%; /* 60% for the photo reel */
+      position: relative;
+      padding-top: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
+    }
+
+    .photo-reel {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-reel img {
+      width: 100%;
+      height: auto;
+    }
+
+    .photo-reel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 1.5em;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .prev-btn {
+      left: 10px;
+    }
+
+    .next-btn {
+      right: 10px;
     }
   </style>
 </head>
@@ -38,6 +82,7 @@
   <h1>Browse Our New & Used Campers</h1>
 
   <div class="filters">
+	<label><input type="checkbox" class="filter-type" value="New"> New</label><label> <input type="checkbox" class="filter-type" value="Used"> Used</label><br>
     <h3>Type of RV</h3>
     <label><input type="checkbox" class="filter-type" value="Travel Trailer"> Travel Trailer</label><br>
     <label><input type="checkbox" class="filter-type" value="Fifth Wheel"> Fifth Wheel</label><br>
@@ -45,7 +90,6 @@
     <label><input type="checkbox" class="filter-type" value="Toy Haulers"> Toy Haulers</label><br>
 
     <h3>Features</h3>
-    <!-- (unchanged) -->
     <label><input type="checkbox" class="filter-feature" value="Outside Kitchen"> Outside Kitchen</label><br>
     <label><input type="checkbox" class="filter-feature" value="Outside Entertainment"> Outside Entertainment</label><br>
     <label><input type="checkbox" class="filter-feature" value="Front Living room"> Front Living room</label><br>
@@ -59,20 +103,17 @@
     <label><input type="checkbox" class="filter-feature" value="Washer/Dryer"> Washer/Dryer</label><br>
 
     <h3>Sleeps</h3>
-    <!-- (unchanged) -->
     <label><input type="radio" name="sleeps" class="filter-sleeps" value="2"> Up to 2</label><br>
     <label><input type="radio" name="sleeps" class="filter-sleeps" value="4"> Up to 4</label><br>
     <label><input type="radio" name="sleeps" class="filter-sleeps" value="6"> Up to 6</label><br>
     <label><input type="radio" name="sleeps" class="filter-sleeps" value="7+"> 7+</label><br>
 
     <h3>Length</h3>
-    <!-- (unchanged) -->
     <label><input type="radio" name="length" class="filter-length" value="21"> Up to 21 ft</label><br>
     <label><input type="radio" name="length" class="filter-length" value="34"> 21–34 ft</label><br>
     <label><input type="radio" name="length" class="filter-length" value="35+"> 34+ ft</label><br>
 
     <h3>Weight</h3>
-    <!-- (unchanged) -->
     <label><input type="radio" name="weight" class="filter-weight" value="3000"> Up to 3,000 lbs</label><br>
     <label><input type="radio" name="weight" class="filter-weight" value="5000"> 3,000–5,000 lbs</label><br>
     <label><input type="radio" name="weight" class="filter-weight" value="7000"> 5,000–7,000 lbs</label><br>
@@ -91,15 +132,15 @@
 
   <script>
     const campers = [
-  { name: "Jayco Eagle", type: "Fifth Wheel", sleeps: 4, length: 30, weight: 7200, price: 55000, features: ["Awning", "King Bed", "Bathroom"] },
-  { name: "Gulf Stream Vintage", type: "Travel Trailer", sleeps: 2, length: 20, weight: 2800, price: 18000, features: ["Awning"] },
-  { name: "Jay Flight", type: "Travel Trailer", sleeps: 6, length: 32, weight: 4500, price: 35000, features: ["Bathroom", "Awning"] },
-  { name: "Forest River Vibe", type: "Travel Trailer", sleeps: 6, length: 34, weight: 6200, price: 48000, features: ["Fireplace", "Kitchen Island", "Awning", "Bathroom"] },
-  { name: "Winnebago Minnie Winnie", type: "Motorhome", sleeps: 7, length: 29, weight: 7400, price: 67000, features: ["Outside Entertainment", "Awning", "Bathroom", "King Bed"] },
-  { name: "Coachmen Chaparral", type: "Fifth Wheel", sleeps: 4, length: 36, weight: 7800, price: 59000, features: ["Fireplace", "Washer/Dryer", "King Bed", "Bathroom"] },
-  { name: "Keystone Fuzion", type: "Toy Haulers", sleeps: 6, length: 39, weight: 8400, price: 73000, features: ["Pass Through Storage", "Outside Kitchen", "Awning", "Bathroom"] },
-  { name: "Jayco Hummingbird", type: "Travel Trailer", sleeps: 2, length: 18, weight: 2900, price: 19500, features: ["Booth Dinette", "Awning"] }
-];
+      { name: "Jayco Eagle", type: "Fifth Wheel", sleeps: 4, length: 30, weight: 7200, price: 55000, features: ["Awning", "King Bed", "Bathroom"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg"] },
+      { name: "Gulf Stream Vintage", type: "Travel Trailer", sleeps: 2, length: 20, weight: 2800, price: 18000, features: ["Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Jay Flight", type: "Travel Trailer", sleeps: 6, length: 32, weight: 4500, price: 35000, features: ["Bathroom", "Awning"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg"] },
+      { name: "Forest River Vibe", type: "Travel Trailer", sleeps: 6, length: 34, weight: 6200, price: 48000, features: ["Fireplace", "Kitchen Island", "Awning", "Bathroom"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg", "camper4.jpg"] },
+      { name: "Winnebago Minnie Winnie", type: "Motorhome", sleeps: 7, length: 29, weight: 7400, price: 67000, features: ["Outside Entertainment", "Awning", "Bathroom", "King Bed"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Coachmen Chaparral", type: "Fifth Wheel", sleeps: 4, length: 36, weight: 7800, price: 59000, features: ["Fireplace", "Washer/Dryer", "King Bed", "Bathroom"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Keystone Fuzion", type: "Toy Haulers", sleeps: 6, length: 39, weight: 8400, price: 73000, features: ["Pass Through Storage", "Outside Kitchen", "Awning", "Bathroom"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Jayco Hummingbird", type: "Travel Trailer", sleeps: 2, length: 18, weight: 2900, price: 19500, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] }
+    ];
 
     const resultDiv = document.getElementById('results');
 
@@ -123,8 +164,12 @@
 
       const filtered = campers.filter(camper => {
         const matchType = selectedTypes.length === 0 || selectedTypes.includes(camper.type);
-        const matchSleeps = !selectedSleeps || (selectedSleeps === '7+' ? camper.sleeps >= 7 : camper.sleeps <= parseInt(selectedSleeps));
-        const matchFeatures = selectedFeatures.every(f => camper.features.includes(f));
+        const matchFeatures = selectedFeatures.length === 0 || selectedFeatures.every(feature => camper.features.includes(feature));
+        const matchSleeps = !selectedSleeps || (selectedSleeps === '2' ? camper.sleeps <= 2 : 
+          selectedSleeps === '4' ? camper.sleeps <= 4 : 
+          selectedSleeps === '6' ? camper.sleeps <= 6 : 
+          selectedSleeps === '7+' ? camper.sleeps >= 7 : true
+        );
         const matchLength = !selectedLength || (
           selectedLength === '21' ? camper.length <= 21 :
           selectedLength === '34' ? camper.length > 21 && camper.length <= 34 :
@@ -137,42 +182,55 @@
           selectedWeight === '7001+' ? camper.weight > 7000 : true
         );
         const matchPrice = !selectedPrice || (
-          selectedPrice === '20000' ? camper.price < 20000 :
-          selectedPrice === '40000' ? camper.price >= 20000 && camper.price <= 40000 :
+          selectedPrice === '20000' ? camper.price <= 20000 :
+          selectedPrice === '40000' ? camper.price > 20000 && camper.price <= 40000 :
           selectedPrice === '60000' ? camper.price > 40000 && camper.price <= 60000 :
           selectedPrice === '60001+' ? camper.price > 60000 : true
         );
 
-        return matchType && matchSleeps && matchFeatures && matchLength && matchWeight && matchPrice;
+        return matchType && matchFeatures && matchSleeps && matchLength && matchWeight && matchPrice;
       });
 
       displayResults(filtered);
     }
 
     function displayResults(campers) {
-      resultDiv.innerHTML = campers.length > 0
-        ? campers.map(c => `
-            <div class="camper">
-              <h2>${c.name}</h2>
-              <p>Type: ${c.type}</p>
-              <p>Sleeps: ${c.sleeps}</p>
-              <p>Length: ${c.length} ft</p>
-              <p>Weight: ${c.weight} lbs</p>
-              <p>Price: $${c.price.toLocaleString()}</p>
-              <p>Features: ${c.features.join(', ')}</p>
+      resultDiv.innerHTML = campers.map(camper => `
+        <div class="camper">
+          <div class="camper-info">
+            <h3>${camper.name}</h3>
+            <p><strong>Type:</strong> ${camper.type}</p>
+            <p><strong>Sleeps:</strong> ${camper.sleeps}</p>
+            <p><strong>Length:</strong> ${camper.length} ft</p>
+            <p><strong>Weight:</strong> ${camper.weight} lbs</p>
+            <p><strong>Price:</strong> $${camper.price}</p>
+            <p><strong>Features:</strong> ${camper.features.join(', ')}</p>
+          </div>
+          <div class="photo-reel-container">
+            <div class="photo-reel">
+              ${camper.images.map(image => `<img src="${image}" alt="${camper.name} image">`).join('')}
             </div>
-          `).join('')
-        : '<p>No campers match your filters.</p>';
+            <div class="photo-reel-button prev-btn" onclick="moveReel(-1)">&#10094;</div>
+            <div class="photo-reel-button next-btn" onclick="moveReel(1)">&#10095;</div>
+          </div>
+        </div>
+      `).join('');
     }
 
-    function resetFilters() {
-      [...typeCheckboxes, ...featureCheckboxes, ...sleepRadios, ...lengthRadios, ...weightRadios, ...priceRadios]
-        .forEach(input => input.checked = false);
-      displayResults(campers);
+    function moveReel(direction) {
+      const reels = document.querySelectorAll('.photo-reel');
+      reels.forEach(reel => {
+        const width = reel.querySelector('img').width;
+        const totalImages = reel.children.length;
+        let currentPosition = parseInt(reel.style.transform.replace('translateX(', '').replace('px)', '') || 0);
+        currentPosition -= direction * width;
+        currentPosition = Math.max(Math.min(currentPosition, 0), -(width * (totalImages - 1)));
+        reel.style.transform = `translateX(${currentPosition}px)`;
+      });
     }
 
+    // Initialize page
     displayResults(campers);
   </script>
-
 </body>
 </html>
