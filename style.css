@@ -1,0 +1,78 @@
+.storage-hero {
+  background: url('storage-hero.jpg') no-repeat center center/cover;
+  height: 60vh;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overview, .features, .customization, .gallery, .testimonials, .contact-form {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  margin-top: 1rem;
+}
+
+.contact-form input, .contact-form textarea {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.contact-form button {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #0055a5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background-color: #003f7f;
+}
+.brand-bar {
+  background: #e0f0ff;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.brand-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.brand-logo {
+  height: 60px;
+  width: auto;
+}
+
+.facebook-icon {
+  font-size: 60px;
+  color: #002244;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.facebook-icon:hover {
+  color: #ffcc00;
+}
