@@ -97,9 +97,10 @@
   </div>
 
     <h3>Type of RV</h3>
+	<label><input type="checkbox" class="filter-type" value="Motorhome"> Motorhome</label><br>
+	<label><input type="checkbox" class="filter-type" value="Fifth Wheel"> Fifth Wheel</label><br>
     <label><input type="checkbox" class="filter-type" value="Travel Trailer"> Travel Trailer</label><br>
-    <label><input type="checkbox" class="filter-type" value="Fifth Wheel"> Fifth Wheel</label><br>
-    <label><input type="checkbox" class="filter-type" value="Motorhome"> Motorhome</label><br>
+	<label><input type="checkbox" class="filter-type" value="Pop-Up"> Pop-Up</label><br>
     <label><input type="checkbox" class="filter-type" value="Toy Haulers"> Toy Haulers</label><br>
 
     <h3>Features</h3>
@@ -149,10 +150,23 @@
       { name: "JayFlight 2024 (Fiberglass) ", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 6, length: 31, weight: 6205, price: 31499, features: ["Awning"], images: ["camper1.jpg", "camper2.jpg"] },
       { name: "JayFlight 2024", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 6, length: 34.5, weight: 6660, price: 32999, features: ["Awning"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg"] },
       { name: "JayCo Eagle 2024", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 6, length: 35, weight: 8585, price: 49500, features: ["Fireplace", "Kitchen Island", "Awning"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg", "camper4.jpg"] },
-      { name: "Winnebago Minnie Winnie", type: "Motorhome", sleeps: 7, length: 29, weight: 7400, price: 67000, features: ["Outside Entertainment", "Awning", "Bathroom", "King Bed"], images: ["camper1.jpg", "camper2.jpg"] },
-      { name: "Coachmen Chaparral", type: "Fifth Wheel", sleeps: 4, length: 36, weight: 7800, price: 59000, features: ["Fireplace", "Washer/Dryer", "King Bed", "Bathroom"], images: ["camper1.jpg", "camper2.jpg"] },
-      { name: "Keystone Fuzion", type: "Toy Haulers", sleeps: 6, length: 39, weight: 8400, price: 73000, features: ["Pass Through Storage", "Outside Kitchen", "Awning", "Bathroom"], images: ["camper1.jpg", "camper2.jpg"] },
-      { name: "Jayco Hummingbird", type: "Travel Trailer", sleeps: 2, length: 18, weight: 2900, price: 19500, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] }
+      { name: "JayFlight 2024", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 7, length: 30, weight: 6055, price: 31199, features: ["Outside Entertainment", "Awning", "Bathroom", "King Bed"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "JayFlight 2024", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 4, length: 36.5, weight: 7635, price: 37995, features: ["Fireplace", "Washer/Dryer", "King Bed", "Bathroom"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "JayFlight 2024", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 6, length: 38, weight: 7500, price: 44500, features: ["Pass Through Storage", "Outside Kitchen", "Awning", "Bathroom"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Gulfstream Amerilite 2022", condition: "New", year: 2022, type: "Travel Trailer", sleeps: 2, length: 25.5, weight: 4064, price: 19750, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Gulfstream Amerilite 2022", condition: "New", year: 2022, type: "Travel Trailer", sleeps: 2, length: 26.5, weight: 3899, price: 16750, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Superlite 2022", condition: "New", year: 2022, type: "Travel Trailer", sleeps: 2, length: 22, weight: 3663, price: 14500, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "JayFlight 2025", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 6, length: 31, weight: 6660, price: 28995, features: ["Awning"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg"] },
+      { name: "Gulfstream Amerilite 2025", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 29.5, weight: 7660, price: 25650, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Gulfstream Amerilite 2025", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 30, weight: 5220, price: 19865, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Gulfstream Amerilite 2025", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 30, weight: 7670, price: 21975, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Gulfstream Conquest 2025", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 38.5, weight: 10360, price: 37599, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Gulfstream Conquest 2025", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 29.5, weight: 9880, price: 37550, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Flagstaff 2016", condition: "Used", year: 2016, type: "Pop-Up", sleeps: 2, price: 14900, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Amerilite 2022", condition: "Used", year: 2022, type: "Travel Trailer", sleeps: 2, price: 22500, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Fleetwood Flair 1995", condition: "Used", year: 1995, images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Pace Arrow 1992", condition: "Used", year: 1992, price: 7000, images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Grey Wolf 2018", condition: "Used", year: 2018, price: 10000, images: ["camper1.jpg", "camper2.jpg"] },
     ];
 
     const resultDiv = document.getElementById('results');
@@ -169,6 +183,16 @@
     [...typeCheckboxes, ...featureCheckboxes, ...sleepRadios, ...lengthRadios, ...weightRadios, ...priceRadios, ...conditionCheckboxes]
       .forEach(input => input.addEventListener('change', filterCampers));
 	yearFilter.addEventListener("change", filterCampers);
+	campers.forEach(camper => {
+		camper.type = camper.type || "Unknown";
+		camper.sleeps = camper.sleeps || 0;
+		camper.length = camper.length || 0;
+		camper.weight = camper.weight || 0;
+		camper.price = camper.price || 0;
+		camper.features = camper.features || [];
+		camper.condition = camper.condition || "Used";
+		});
+
 
 function filterCampers() {
   const selectedConditions = Array.from(conditionCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
@@ -181,7 +205,8 @@ function filterCampers() {
   const selectedYear = yearFilter.value;
 
   const filtered = campers.filter(camper => {
-    const matchCondition = selectedConditions.length === 0 || selectedConditions.includes(camper.condition || "Used");
+    const matchCondition = selectedConditions.length === 0 || selectedConditions.includes(camper.condition);
+
     const matchType = selectedTypes.length === 0 || selectedTypes.includes(camper.type);
     const matchYear = !selectedYear || camper.year == selectedYear;
     const matchFeatures = selectedFeatures.length === 0 || selectedFeatures.every(feature => camper.features.includes(feature));
