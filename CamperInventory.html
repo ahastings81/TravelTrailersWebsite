@@ -141,8 +141,14 @@
 
     <button onclick="resetFilters()">Reset Filters</button>
   </div>
-
-  <div class="results" id="results"></div>
+	<!-- Calendar app -->             
+  <div class="results" id="results"></div> 
+  
+  <!-- Global Modal used by all Book buttons -->
+  <div id="calendarModal" style="display:none; position:fixed; top:10%; left:10%; width:80%; height:80%; background:white; z-index:1000; border-radius:8px;">
+	<iframe src="https://calendly.com/hastings311/30min" width="100%" height="100%" frameborder="0"></iframe>
+	<button id="closeModalBtn" style="position:absolute; top:10px; right:10px;">✖</button>
+  </div>
 
   <script>
     const campers = [
@@ -256,6 +262,8 @@ function filterCampers() {
             <p><strong>Weight:</strong> ${camper.weight} lbs</p>
             <p><strong>Price:</strong> $${camper.price}</p>
             <p><strong>Features:</strong> ${camper.features.join(', ')}</p>
+			<!-- Button -->
+			<button class="bookBtn">Book a Viewing</button>
           </div>
           <div class="photo-reel-container">
             <div class="photo-reel">
@@ -268,7 +276,7 @@ function filterCampers() {
         </div>
       `).join('');
     }
-
+		
     function moveReel(button, direction) {
 		const reel = button.parentElement.querySelector('.photo-reel');
 		const width = reel.querySelector('img').width;
@@ -281,10 +289,36 @@ function filterCampers() {
 		reel.style.transform = `translateX(${currentPosition}px)`;
 		reel.setAttribute('data-position', currentPosition);
 	}
-
+	
 
     // Initialize page
     displayResults(campers);
+	document.addEventListener("DOMContentLoaded", () => {
+		const modal = document.getElementById("calendarModal");
+		const closeModalBtn = document.getElementById("closeModalBtn");
+
+	// Open modal when any .bookBtn is clicked
+		document.addEventListener("click", (e) => {
+			if (e.target.classList.contains("bookBtn")) {
+				modal.style.display = "block";
+			}
+		});
+
+	// Close modal when ✖ is clicked
+		closeModalBtn.addEventListener("click", () => {
+			modal.style.display = "none";
+		});
+
+	// Close modal when clicking outside the modal content
+		window.addEventListener("click", (event) => {
+			if (event.target === modal) {
+				modal.style.display = "none";
+			}
+		});
+	});
+
+
+		
   </script>
 </body>
 </html>
