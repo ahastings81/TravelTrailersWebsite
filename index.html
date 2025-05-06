@@ -5,29 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel Trailers Sales and Service</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts for clean, modern typography -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome for social icons -->
+  <!-- Font Awesome for social media icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <style>
+    /* Reset default browser styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; background: #add8e6; color: #333; }
+
+    /* Global body styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #add8e6; /* Light blue background */
+      color: #333;
+    }
+
+    /* Header styling with navigation */
     header {
-      background: #002244;
+      background: #002244; /* Navy blue */
       color: white;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
+    /* Navigation links */
     nav a {
       color: white;
       text-decoration: none;
       margin: 0 1rem;
       font-weight: bold;
     }
+
+    /* Hero section with background image and title */
     .hero {
       background: url('hero.jpg') no-repeat center center/cover;
       height: 60vh;
@@ -38,13 +51,15 @@
       text-align: center;
       color: white;
     }
+
     .hero h1 {
       font-size: 4rem;
       font-weight: 900;
-      background-color: rgba(173, 216, 230, 0.8);
+      background-color: rgba(173, 216, 230, 0.8); /* semi-transparent background */
       padding: 0.5rem 1rem;
       border-radius: 10px;
     }
+
     .hero p {
       font-size: 1.25rem;
       margin: 1rem 0;
@@ -52,6 +67,8 @@
       padding: 0.5rem 1rem;
       border-radius: 8px;
     }
+
+    /* Call to action button */
     .btn {
       background: #ffcc00;
       color: #000;
@@ -61,21 +78,27 @@
       cursor: pointer;
       font-weight: bold;
     }
+
+    /* Reusable section styling */
     .section {
       padding: 4rem 2rem;
       max-width: 1200px;
       margin: auto;
     }
+
     .section h2 {
       text-align: center;
       margin-bottom: 2rem;
     }
+
+    /* Layout for featured camper cards */
     .cards {
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
       justify-content: center;
     }
+
     .card {
       background: white;
       padding: 1rem;
@@ -85,10 +108,10 @@
       text-align: center;
     }
 
+    /* Photo carousel container */
     .photo-reel {
       position: relative;
       width: 100%;
-      max-width: 100%;
       margin-bottom: 10px;
     }
 
@@ -98,6 +121,7 @@
       border-radius: 8px;
     }
 
+    /* Carousel control buttons */
     .reel-controls {
       text-align: center;
       margin-top: 5px;
@@ -114,6 +138,7 @@
       border: none;
     }
 
+    /* Footer styles */
     footer {
       background: #002244;
       color: white;
@@ -121,45 +146,57 @@
       padding: 1rem;
       margin-top: 2rem;
     }
+
+    /* Social media icon styling */
     .social-icons a {
       color: white;
       margin: 0 0.5rem;
       font-size: 1.5rem;
       transition: color 0.3s ease;
     }
+
     .social-icons a:hover {
       color: #ffcc00;
     }
 
+    /* Responsive styles for mobile */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
         text-align: center;
       }
+
       nav {
         margin-top: 1rem;
       }
+
       nav a {
         display: block;
         margin: 0.5rem 0;
       }
+
       .hero h1 {
         font-size: 2rem;
       }
+
       .hero p {
         font-size: 1rem;
       }
+
       .cards {
         flex-direction: column;
         align-items: center;
       }
+
       .brand-logos {
         flex-direction: column;
         gap: 1rem;
       }
+
       .brand-logos img {
         max-width: 40%;
       }
+
       .brand-logos a {
         font-size: 2.5rem;
       }
@@ -167,6 +204,7 @@
   </style>
 </head>
 <body>
+  <!-- Site Header -->
   <header>
     <div style="font-size: 1.75rem; font-weight: 900;">Travel Trailers USA</div>
     <nav>
@@ -174,38 +212,43 @@
       <a href="CamperInventory.html?type=new">New RVs</a>
       <a href="CamperInventory.html?type=used">Used RVs</a>
       <a href="storage-buildings.html">Storage Buildings</a>
-      <a href="#">Services</a>
+      <a href="services.html">Service Dept.</a>
       <a href="#">Parts</a>
       <a href="#">Contact</a>
     </nav>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
     <h1>Travel Trailers Sales and Service</h1>
     <p>Certified Jayco & Gulf Stream Dealer - Serving You Since 2005</p>
     <img src="DiscoverTheUsa.jpg" alt="Travel Trailer" style="max-width: 100%; height: auto; margin-top: 20px; margin-bottom: 20px;">
     <a href="CamperInventory.html">
-		<button class="btn">Browse Inventory</button>
-	</a>
+      <button class="btn">Browse Inventory</button>
+    </a>
   </section>
 
+  <!-- Brand Bar with Logos and Social Link -->
   <section class="brand-bar">
     <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; margin: 2rem 0;">
       <a href="https://www.jayco.com" target="_blank">
-		<img src="jayco-seeklogo.png" alt="Jayco Logo" style="height: 60px;">
-	  </a>
-	  <a href="https://www.gulfstreamcoach.com/" target="_blank">
-      <img src="gulf-stream.png" alt="Gulf Stream Logo" style="height: 60px;">
+        <img src="jayco-seeklogo.png" alt="Jayco Logo" style="height: 60px;">
+      </a>
+      <a href="https://www.gulfstreamcoach.com/" target="_blank">
+        <img src="gulf-stream.png" alt="Gulf Stream Logo" style="height: 60px;">
+      </a>
       <a href="https://www.facebook.com/Travel.Trailers.Sales/?ref=aymt_homepage_panel" target="_blank" aria-label="Facebook">
         <i class="fab fa-facebook" style="font-size: 60px; color: #002244;"></i>
       </a>
     </div>
   </section>
 
+  <!-- Featured Campers Section -->
   <section class="section">
     <h2>Our Featured Campers</h2>
     <div class="cards">
-      <!-- Card 1 -->
+	
+      <!-- Card 1 with photo carousel -->
       <div class="card">
         <div class="photo-reel">
           <img id="camper1" class="reel-image" src="camper1a.jpg" alt="Jayco Eagle">
@@ -217,7 +260,8 @@
         <h3>2024 Jayco Eagle</h3>
         <p>Luxury, space, and comfort all in one package. Contact us to schedule a tour.</p>
       </div>
-      <!-- Card 2 -->
+
+      <!-- Card 2 with photo carousel -->
       <div class="card">
         <div class="photo-reel">
           <img id="camper2" class="reel-image" src="camper2a.jpg" alt="Gulf Stream Vista">
@@ -232,6 +276,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Travel Trailers Sales & Service, Inc. | Last updated: April 30, 2025</p>
     <div class="social-icons">
@@ -239,18 +284,24 @@
     </div>
   </footer>
 
+  <!-- Image Carousel Script -->
   <script>
+    // Array of image sets for each camper
     const images = [
       ["camper1a.jpg", "camper1b.jpg", "camper1c.jpg"],
       ["camper2a.jpg", "camper2b.jpg", "camper2c.jpg"]
     ];
+
+    // Tracks the current image index for each carousel
     const current = [0, 0];
 
+    // Show the next image for a given camper card
     function nextImage(index) {
       current[index] = (current[index] + 1) % images[index].length;
       document.getElementById(`camper${index + 1}`).src = images[index][current[index]];
     }
 
+    // Show the previous image for a given camper card
     function prevImage(index) {
       current[index] = (current[index] - 1 + images[index].length) % images[index].length;
       document.getElementById(`camper${index + 1}`).src = images[index][current[index]];
