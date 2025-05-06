@@ -38,43 +38,46 @@
       margin-top: 1.5em;
     }
 
-    /* Canvas for Photo Reel */
-    .photo-reel-container {
-      width: 60%; /* 60% for the photo reel */
-      position: relative;
-      padding-top: 10px;
-      padding-right: 10px;
-      padding-bottom: 10px;
-    }
+   /* Canvas for Photo Reel */
+	.photo-reel-container {
+		width: 60%;
+		position: relative;
+		padding: 10px;
+		overflow: hidden; /* Hide overflowing images */
+	}
 
-    .photo-reel {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
+	.photo-reel {
+		display: flex;
+		transition: transform 0.5s ease;
+		width: 100%;
+	}
 
-    .photo-reel img {
-      width: 100%;
-      height: auto;
-    }
+	.photo-reel img {
+		width: 100%;
+		flex-shrink: 0; /* Prevent shrinking */
+		object-fit: cover;
+	}
 
-    .photo-reel-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      font-size: 1.5em;
-      padding: 10px;
-      cursor: pointer;
-    }
 
-    .prev-btn {
-      left: 10px;
-    }
+	.photo-reel-button {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		background-color: rgba(0, 0, 0, 0.5);
+		color: white;
+		font-size: 1.5em;
+		padding: 10px;
+		cursor: pointer;
+	}
 
-    .next-btn {
-      right: 10px;
-    }
+	.prev-btn {
+		left: 10px;
+	}
+
+	.next-btn {
+		right: 10px;
+	}
+ 
   </style>
 </head>
 <body>
@@ -152,27 +155,30 @@
 
   <script>
     const campers = [
-      { name: "Jayflight 183RB", condition: "New", year: 2022, type: "Travel Trailer", sleeps: 4, length: 21, weight: 3270, price: 15500, features: ["Awning", "King Bed"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg"] },
+      { name: "Jayflight 183RB", condition: "New", year: 2022, type: "Travel Trailer", sleeps: 4, length: 21, weight: 3270, price: 15500, features: ["Awning", "King Bed"], images: ["2022Jayflight183RBpics/IMG_5538.jpg", "2022Jayflight183RBpics/IMG_5539.jpg", "2022Jayflight183RBpics/IMG_5540.jpg", "2022Jayflight183RBpics/IMG_5541.jpg", "2022Jayflight183RBpics/IMG_5542.jpg", "2022Jayflight183RBpics/IMG_5543.jpg", "2022Jayflight183RBpics/IMG_5544.jpg", "2022Jayflight183RBpics/IMG_5545.jpg", "2022Jayflight183RBpics/IMG_5546.jpg"] },
       { name: "JayFlight 265RLS (Fiberglass) ", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 6, length: 31, weight: 6205, price: 31499, features: ["Awning"], images: ["camper1.jpg", "camper2.jpg"] },
       { name: "JayFlight 280BHK", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 6, length: 34.5, weight: 6660, price: 32999, features: ["Awning"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg"] },
       { name: "JayCo Eagle 274FKDS", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 6, length: 35, weight: 8585, price: 49500, features: ["Fireplace", "Kitchen Island", "Awning"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg", "camper4.jpg"] },
       { name: "JayFlight 263RBS", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 7, length: 30, weight: 6055, price: 31199, features: ["Outside Entertainment", "Awning", "Bathroom", "King Bed"], images: ["camper1.jpg", "camper2.jpg"] },
-      { name: "JayFlight 324BDS", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 4, length: 36.5, weight: 7635, price: 37995, features: ["Fireplace", "Washer/Dryer", "King Bed", "Bathroom"], images: ["camper1.jpg", "camper2.jpg"] },
-      { name: "JayFlight 340RLK", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 6, length: 38, weight: 7500, price: 44500, features: ["Pass Through Storage", "Outside Kitchen", "Awning", "Bathroom"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "JayFlight 324BDS", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 4, length: 36.5, weight: 7635, price: 37995, features: ["Fireplace", "Washer/Dryer", "King Bed", "Bathroom"], images: ["Jayflight324BDSpics/IMG_5547.jpg", "Jayflight324BDSpics/IMG_5548.jpg", "Jayflight324BDSpics/IMG_5549.jpg",  "Jayflight324BDSpics/IMG_5550.jpg", "Jayflight324BDSpics/IMG_5551.jpg", "Jayflight324BDSpics/IMG_5552.jpg", "Jayflight324BDSpics/IMG_5553.jpg", "Jayflight324BDSpics/IMG_5554.jpg", "Jayflight324BDSpics/IMG_5555.jpg", "Jayflight324BDSpics/IMG_5556.jpg", "Jayflight324BDSpics/IMG_5557.jpg", "Jayflight324BDSpics/IMG_5558.jpg", "Jayflight324BDSpics/IMG_5559.jpg", "Jayflight324BDSpics/IMG_5560.jpg"] },
+      { name: "JayFlight 340RLK", condition: "New", year: 2024, type: "Travel Trailer", sleeps: 6, length: 38, weight: 7500, price: 44500, features: ["Pass Through Storage", "Outside Kitchen", "Awning", "Bathroom"], images: ["Jayflight340RLKpics/IMG_5569.jpg", "Jayflight340RLKpics/IMG_5570.jpg", "Jayflight340RLKpics/IMG_5571.jpg", "Jayflight340RLKpics/IMG_5572.jpg", "Jayflight340RLKpics/IMG_5573.jpg", "Jayflight340RLKpics/IMG_5574.jpg", "Jayflight340RLKpics/IMG_5575.jpg", "Jayflight340RLKpics/IMG_5576.jpg", "Jayflight340RLKpics/IMG_5577.jpg", "Jayflight340RLKpics/IMG_5578.jpg", "Jayflight340RLKpics/IMG_5579.jpg",] },
       { name: "Gulfstream Amerilite 22RSD", condition: "New", year: 2022, type: "Travel Trailer", sleeps: 2, length: 25.5, weight: 4064, price: 19750, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
       { name: "Gulfstream Amerilite 248BH", condition: "New", year: 2022, type: "Travel Trailer", sleeps: 2, length: 26.5, weight: 3899, price: 16750, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
       { name: "Superlite 197BH", condition: "New", year: 2022, type: "Travel Trailer", sleeps: 2, length: 22, weight: 3663, price: 14500, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
-      { name: "JayFlight 262RLS", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 6, length: 31, weight: 6660, price: 28995, features: ["Awning"], images: ["camper1.jpg", "camper2.jpg", "camper3.jpg"] },
-      { name: "Gulfstream Amerilite 268BH", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 29.5, weight: 7660, price: 25650, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "JayFlight 262RLS", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 6, length: 31, weight: 6660, price: 28995, features: ["Awning"], images: ["Jayflight262RLSpics/IMG_5528.jpg", "Jayflight262RLSpics/IMG_5529.jpg", "Jayflight262RLSpics/IMG_5530.jpg", "Jayflight262RLSpics/IMG_5531.jpg", "Jayflight262RLSpics/IMG_5533.jpg", "Jayflight262RLSpics/IMG_5534.jpg", "Jayflight262RLSpics/IMG_5535.jpg", "Jayflight262RLSpics/IMG_5536.jpg", "Jayflight262RLSpics/IMG_5537.jpg"] },
+      { name: "Gulfstream Amerilite 268BH", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 29.5, weight: 7660, price: 25650, features: ["Booth Dinette", "Awning"], images: ["Serial74880pics/img_5500.jpg", "Serial74880pics/img_5501.jpg", "Serial74880pics/img_5502.jpg", "Serial74880pics/img_5503.jpg", "Serial74880pics/img_5504.jpg", "Serial74880pics/img_5505.jpg", "Serial74880pics/img_5500.jpg"]},
       { name: "Gulfstream Amerilite 26BHG", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 30, weight: 5220, price: 19865, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
       { name: "Gulfstream Amerilite 269BH", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 30, weight: 7670, price: 21975, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
-      { name: "Gulfstream Conquest C302SBW", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 38.5, weight: 10360, price: 37599, features: ["Booth Dinette", "Awning"], images: ["Serial176061pics/IMG_5482.jpg", "Serial176061pics/IMG_5483.jpg", "Serial176061pics/IMG_5484.jpg", "Serial176061pics/IMG_5485.jpg", "Serial176061pics/IMG_5486.jpg", "Serial176061pics/IMG_5487.jpg", "Serial176061pics/IMG_5488.jpg", "Serial176061pics/IMG_5489.jpg", "Serial176061pics/IMG_5490.jpg", "Serial176061pics/IMG_5491.jpg", "Serial176061pics/IMG_5492.jpg",] },
-      { name: "Gulfstream Conquest C323TBR", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 29.5, weight: 9880, price: 37550, features: ["Booth Dinette", "Awning"], images: ["gulfstreampics/IMG_5470.jpg", "gulfstreampics/IMG_5471.jpg", "gulfstreampics/IMG_5472.jpg", "gulfstreampics/IMG_5473.jpg", "gulfstreampics/IMG_5474.jpg", "gulfstreampics/IMG_5475.jpg", "gulfstreampics/IMG_5476.jpg", "gulfstreampics/IMG_5477.jpg", "gulfstreampics/IMG_5478.jpg", "gulfstreampics/IMG_5479.jpg", "gulfstreampics/IMG_5480.jpg", "gulfstreampics/IMG_5481.jpg",] },
-      { name: "Flagstaff 625D", condition: "Used", year: 2016, type: "Pop-Up", sleeps: 2, price: 14900, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Gulfstream Conquest C302SBW", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 38.5, weight: 10360, price: 37599, features: ["Booth Dinette", "Awning"], images: ["Serial176061pics/IMG_5482.jpg", "Serial176061pics/IMG_5483.jpg", "Serial176061pics/IMG_5484.jpg", "Serial176061pics/IMG_5485.jpg", "Serial176061pics/IMG_5486.jpg", "Serial176061pics/IMG_5487.jpg", "Serial176061pics/IMG_5488.jpg", "Serial176061pics/IMG_5489.jpg", "Serial176061pics/IMG_5490.jpg", "Serial176061pics/IMG_5491.jpg", "Serial176061pics/IMG_5492.jpg"] },
+      { name: "Gulfstream Conquest C323TBR", condition: "New", year: 2025, type: "Travel Trailer", sleeps: 2, length: 29.5, weight: 9880, price: 37550, features: ["Booth Dinette", "Awning"], images: ["gulfstreampics/IMG_5470.jpg", "gulfstreampics/IMG_5471.jpg", "gulfstreampics/IMG_5472.jpg", "gulfstreampics/IMG_5473.jpg", "gulfstreampics/IMG_5474.jpg", "gulfstreampics/IMG_5475.jpg", "gulfstreampics/IMG_5476.jpg", "gulfstreampics/IMG_5477.jpg", "gulfstreampics/IMG_5478.jpg", "gulfstreampics/IMG_5479.jpg", "gulfstreampics/IMG_5480.jpg", "gulfstreampics/IMG_5481.jpg"] },
+      { name: "Flagstaff 625D", condition: "Used", year: 2016, type: "Pop-Up", sleeps: 2, price: 14900, features: ["Booth Dinette", "Awning"], images: ["FlagstaffPopUppics/IMG_5561.jpg", "FlagstaffPopUppics/IMG_5562.jpg", "FlagstaffPopUppics/IMG_5563.jpg", "FlagstaffPopUppics/IMG_5564.jpg", "FlagstaffPopUppics/IMG_5565.jpg", "FlagstaffPopUppics/IMG_5566.jpg", "FlagstaffPopUppics/IMG_5567.jpg", "FlagstaffPopUppics/IMG_5568.jpg"] },
       { name: "Amerilite 279BH", condition: "Used", year: 2022, type: "Travel Trailer", sleeps: 2, price: 22500, features: ["Booth Dinette", "Awning"], images: ["camper1.jpg", "camper2.jpg"] },
-      { name: "Fleetwood Flair P30", condition: "Used", year: 1995, type: "Motorhome", images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Fleetwood Flair P30", condition: "Used", year: 1995, type: "Motorhome", price: 1, images: ["camper1.jpg", "camper2.jpg"] },
       { name: "Pace Arrow 1992", condition: "Used", year: 1992, type: "Motorhome", price: 7000, images: ["camper1.jpg", "camper2.jpg"] },
-      { name: "Grey Wolf 2018", condition: "Used", year: 2018, type: "Toy Hauler", price: 10000, images: ["camper1.jpg", "camper2.jpg"] },
+      { name: "Grey Wolf 2018", condition: "Used", year: 2018, type: "Toy Haulers", price: 10000, images: ["camper1.jpg", "camper2.jpg"] },
+	  { name: "StarCraft Autumn 27RLI", condition: "Used", year: 2019, type: "Travel Trailer", price: 20000, features: ["Booth Dinette", "Awning"], images: ["2019starcraftautumn27rlipics/img_5507.jpg", "2019starcraftautumn27rlipics/img_5508.jpg", "2019starcraftautumn27rlipics/img_5509.jpg", "2019starcraftautumn27rlipics/img_5510.jpg", "2019starcraftautumn27rlipics/img_5511.jpg", "2019starcraftautumn27rlipics/img_5512.jpg", "2019starcraftautumn27rlipics/img_5513.jpg", "2019starcraftautumn27rlipics/img_5514.jpg", "2019starcraftautumn27rlipics/img_5515.jpg", "2019starcraftautumn27rlipics/img_5516.jpg", "2019starcraftautumn27rlipics/img_5517.jpg"]},
+	  { name: "JayCo Eagle 321RSTS", condition: "Used", year: 2015, type: "Fifth Wheel", price: 26000, features: ["Fireplace", "Booth Dinette", "Kitchen Island", "Awning"], images: ["2015JaycoEagle321RSTSpics/IMG_5518.jpg", "2015JaycoEagle321RSTSpics/IMG_5519.jpg", "2015JaycoEagle321RSTSpics/IMG_5520.jpg", "2015JaycoEagle321RSTSpics/IMG_5521.jpg", "2015JaycoEagle321RSTSpics/IMG_5522.jpg", "2015JaycoEagle321RSTSpics/IMG_5523.jpg", "2015JaycoEagle321RSTSpics/IMG_5524.jpg", "2015JaycoEagle321RSTSpics/IMG_5525.jpg", "2015JaycoEagle321RSTSpics/IMG_5526.jpg", "2015JaycoEagle321RSTSpics/IMG_5527.jpg"]}
+
     ];
 
     const resultDiv = document.getElementById('results');
@@ -246,50 +252,73 @@ function filterCampers() {
 }
 
 
-    function displayResults(campers) {
+	function displayResults(campers) {
 	  if (campers.length === 0) {
 		resultDiv.innerHTML = "<p style='padding: 1em; font-size: 1.2em;'>No campers match your criteria. Try adjusting your filters.</p>";
 		return;
-	}
-      resultDiv.innerHTML = campers.map(camper => `       
-        <div class="camper">
-          <div class="camper-info">
-            <h3>${camper.name}</h3>
+	  }
+
+	  resultDiv.innerHTML = campers.map(camper => `
+		<div class="camper">
+		  <div class="camper-info">
+			<h3>${camper.name}</h3>
 			<p><strong>Condition:</strong> ${camper.condition}</p>
 			<p><strong>Year:</strong> ${camper.year}</p>
 			<p><strong>Type:</strong> ${camper.type}</p>
-            <p><strong>Sleeps:</strong> ${camper.sleeps}</p>
-            <p><strong>Length:</strong> ${camper.length} ft</p>
-            <p><strong>Weight:</strong> ${camper.weight} lbs</p>
-            <p><strong>Price:</strong> $${camper.price}</p>
-            <p><strong>Features:</strong> ${camper.features.join(', ')}</p>
-			<!-- Button -->
+			<p><strong>Sleeps:</strong> ${camper.sleeps}</p>
+			<p><strong>Length:</strong> ${camper.length} ft</p>
+			<p><strong>Weight:</strong> ${camper.weight} lbs</p>
+			<p><strong>Price:</strong> $${camper.price}</p>
+			<p><strong>Features:</strong> ${camper.features.join(', ')}</p>
 			<button class="bookBtn">Book a Viewing</button>
-          </div>
-          <div class="photo-reel-container">
-            <div class="photo-reel">
-              ${camper.images.map(image => `<img src="${image}" alt="${camper.name} image">`).join('')}
-            </div>
-            <div class="photo-reel-button prev-btn" onclick="moveReel(this, -1)">&#10094;</div>
-			<div class="photo-reel-button next-btn" onclick="moveReel(this, 1)">&#10095;</div>
-
-          </div>
-        </div>
-      `).join('');
-    }
-		
-    function moveReel(button, direction) {
-		const reel = button.parentElement.querySelector('.photo-reel');
-		const width = reel.querySelector('img').width;
-		const totalImages = reel.children.length;
-		let currentPosition = parseInt(reel.getAttribute('data-position') || '0');
-
-		currentPosition -= direction * width;
-		currentPosition = Math.max(Math.min(currentPosition, 0), -(width * (totalImages - 1)));
-
-		reel.style.transform = `translateX(${currentPosition}px)`;
-		reel.setAttribute('data-position', currentPosition);
+		  </div>
+		  <div class="photo-reel-container">
+			<div class="photo-reel" data-position="0">
+			  ${camper.images.map(image => `<img src="${image}" alt="${camper.name} image">`).join('')}
+			</div>
+			<div class="photo-reel-button prev-btn">&#10094;</div>
+			<div class="photo-reel-button next-btn">&#10095;</div>
+		  </div>
+		</div>
+	  `).join('');
+	  
+	  // Add event listeners to buttons
+	  document.querySelectorAll('.prev-btn').forEach(button => {
+		button.addEventListener('click', function() {
+		  moveReel(this, -1);
+		});
+	  });
+	  
+	  document.querySelectorAll('.next-btn').forEach(button => {
+		button.addEventListener('click', function() {
+		  moveReel(this, 1);
+		});
+	  });
 	}
+
+	function moveReel(button, direction) {
+		const reel = button.parentElement.querySelector('.photo-reel');
+		const images = reel.querySelectorAll('img');
+		const totalImages = images.length;
+
+		// Get current index or default to 0
+		let currentIndex = parseInt(reel.getAttribute('data-index') || '0');
+
+		// Update index based on direction
+		currentIndex += direction;
+		currentIndex = Math.max(0, Math.min(currentIndex, totalImages - 1)); // clamp
+
+		// Calculate width of one image
+		const imageWidth = reel.clientWidth;
+
+		// Move reel to new index
+		reel.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+
+		// Save index
+		reel.setAttribute('data-index', currentIndex);
+	}
+
+
 	
 
     // Initialize page
