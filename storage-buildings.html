@@ -100,38 +100,36 @@
     </p>
   </section>
 
-  
-  <!-- PDF VIEWER SECTION -->
-  <section class="pdf-section">
-    <h2>Download &amp; View Our Storage Buildings Brochure</h2>
+  <!-- ========= NEW: PDF Viewer Section ========= -->
+  <section class="pdf‐section">
+    <h2>Download & View Our Storage Buildings Brochure</h2>
 
-    <!-- Container where PDF.js will render each page -->
-    <div id="pdf-viewer" style="border: 1px solid #ccc; padding: 1rem;">
-      <!-- Each page of the PDF appears here as a <canvas> -->
+    <!-- Container where PDF.js will render each page as a <canvas> -->
+    <div id="pdf‐viewer" style="border: 1px solid #ccc; padding: 1rem;">
+      <!-- Canvas elements go here dynamically via JS -->
     </div>
 
     <!-- Fallback if PDF.js fails or JS is disabled -->
     <object
-      data="storage-buildings.pdf"
+      data="storage-building-guide.pdf"
       type="application/pdf"
       width="100%"
       height="600px"
-      aria-label="Storage Buildings PDF"
+      aria‐label="Storage Buildings PDF"
       style="margin-top: 1rem;"
     >
       <p>
         Your browser does not support inline PDFs. You can
-        <a href="storage-buildings.pdf" download>download our brochure here</a>.
+        <a href="storage-building-guide.pdf" download>download our brochure here</a>.
       </p>
     </object>
 
     <!-- Download button for users who simply want the file -->
     <p style="text-align: center; margin-top: 1rem;">
-      <a href="storage-buildings.pdf" download class="btn">Download PDF</a>
+      <a href="storage-building-guide.pdf" download class="btn">Download PDF</a>
     </p>
   </section>
 
-  <!-- CONTACT FORM SECTION -->
   <section id="contact" class="contact-form">
     <h2>Request a Quote</h2>
     <form>
@@ -144,59 +142,59 @@
       <label for="message">Message:</label>
       <textarea id="message" name="message" required></textarea>
 
-      <button type="submit" class="btn">Submit</button>
+      <button type="submit">Submit</button>
     </form>
   </section>
 
-  <!-- FOOTER -->
+  <!-- Footer remains unchanged -->
   <footer>
-    <p>&copy; 2025 Travel Trailers Sales &amp; Service, Inc. | Last updated: April 30, 2025</p>
+    <p>&copy; 2025 Travel Trailers Sales & Service, Inc. | Last updated: April 30, 2025</p>
   </footer>
 
-  <!-- PDF.js SCRIPTS -->
+  <!-- ========= PDF.js Scripts ========= -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
   <script>
-    (async () => {
-      // 1) URL of the PDF to load
-      const PDF_URL = 'storage-buildings.pdf';
+    // 1) Point to your PDF file
+    const PDF_URL = 'storage-building-guide.pdf';
 
-      // 2) Tell PDF.js where its worker is
-      pdfjsLib.GlobalWorkerOptions.workerSrc =
-        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    // 2) Tell PDF.js where its worker is
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
-      // 3) Get the container and load the document
-      const container = document.getElementById('pdf-viewer');
+    // 3) When DOM is ready, fetch and render all pages
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('pdf‐viewer');
       if (!container) return;
 
-      try {
-        const pdfDoc = await pdfjsLib.getDocument(PDF_URL).promise;
+      pdfjsLib
+        .getDocument(PDF_URL)
+        .promise.then(pdfDoc => {
+          // Render each page
+          for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+            pdfDoc.getPage(pageNum).then(page => {
+              const viewport = page.getViewport({ scale: 1.2 });
+              const canvas = document.createElement('canvas');
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              canvas.style.display = 'block';
+              canvas.style.margin = '0 auto 1rem';
 
-        // Loop through pages in numerical order
-        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-          const page = await pdfDoc.getPage(pageNum);
-          const viewport = page.getViewport({ scale: 1.2 });
-          const canvas = document.createElement('canvas');
-
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-          canvas.style.display = 'block';
-          canvas.style.margin = '0 auto 1rem';
-
-          const renderContext = {
-            canvasContext: canvas.getContext('2d'),
-            viewport: viewport
-          };
-
-          // Render the page into its canvas, then append once done
-          await page.render(renderContext).promise;
-          container.appendChild(canvas);
-        }
-      } catch (err) {
-        console.error('PDF loading error:', err);
-        // The <object> fallback below will remain visible if anything fails
-      }
-    })();
+              const renderContext = {
+                canvasContext: canvas.getContext('2d'),
+                viewport: viewport
+              };
+              page.render(renderContext).promise.then(() => {
+                container.appendChild(canvas);
+              });
+            });
+          }
+        })
+        .catch(err => {
+          console.error('PDF loading error:', err);
+          // If PDF.js fails, the <object> fallback is still visible below
+        });
+    });
   </script>
 </body>
 </html>
