@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Storage Buildings | Travel Trailers Sales & Service</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <style>
     /* Header styling with navigation */
     header {
@@ -22,16 +22,29 @@
       text-decoration: none;
       margin: 0 1rem;
       font-weight: bold;
-      /* Footer styles */
-      /* Footer styles */
-      /* Footer styles */
     }
-    footer {
-      background: #002244;
-      color: white;
+
+    /* PDF section */
+    .pdf‐section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .pdf‐section h2 {
       text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #002244;
+    }
+
+    .btn {
+      background: #ffcc00;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -48,21 +61,24 @@
       <a href="#">Contact</a>
     </nav>
   </header>
-  <header class="hero storage-hero">
-    <!-- Hero image or background styling goes here -->
-  </header>
-  
+
+  <!-- Hero image / overlay remains as before -->
+  <header class="hero storage-hero"></header>
   <div class="overlay">
     <a href="#contact" class="btn">Request a Quote</a>
   </div>
 
   <section class="overview">
     <h2>Our Storage Solutions</h2>
-    <p>We offer a range of storage buildings designed to meet your specific needs. Whether you're looking to store your RV, tools, or other equipment, our buildings are built to last and can be customized to your preferences.</p>
+    <p>
+      We offer a range of storage buildings designed to meet your specific needs.
+      Whether you're looking to store your RV, tools, or other equipment, our
+      buildings are built to last and can be customized to your preferences.
+    </p>
   </section>
 
   <section class="features">
-    <h2>Features &amp; Benefits</h2>
+    <h2>Features & Benefits</h2>
     <ul>
       <li>High-quality materials for durability</li>
       <li>Customizable sizes and designs</li>
@@ -73,54 +89,51 @@
 
   <section class="customization">
     <h2>Customization Options</h2>
-    <p>Choose from various sizes, materials, colors, and additional features like windows, doors, and insulation to create the perfect storage solution for your needs.</p>
-  </section>
-
-  <!-- PDF Download & Embed Section -->
-  <section class="pdf-guide">
-    <h2>Storage Building Guide (PDF)</h2>
-    <!-- Download link -->
     <p>
-      <a href="storage-building-guide.pdf" target="_blank" rel="noopener">
-        Download the Storage Building Guide
-      </a>
+      Choose from various sizes, materials, colors, and additional features like
+      windows, doors, and insulation to create the perfect storage solution for
+      your needs.
     </p>
-    <!-- Embedded PDF viewer -->
-    <div style="width: 100%; max-width: 800px; margin: 2rem auto;">
-      <embed
-        src="storage-building-guide.pdf"
-        type="application/pdf"
-        width="100%"
-        height="600px"
-      >
-      <!-- Fallback link if embedding isn't supported -->
-      <p>
-        <a href="storage-building-guide.pdf" target="_blank" rel="noopener">
-          View or download the PDF here.
-        </a>
-      </p>
+  </section>
+
+  <!-- ========= NEW: PDF Viewer Section ========= -->
+  <section class="pdf‐section">
+    <h2>Download & View Our Storage Buildings Brochure</h2>
+
+    <!-- Container where PDF.js will render each page as a <canvas> -->
+    <div id="pdf‐viewer" style="border: 1px solid #ccc; padding: 1rem;">
+      <!-- Canvas elements go here dynamically via JS -->
     </div>
-  </section>
-  <!-- End of PDF Download & Embed Section -->
 
-  <section class="gallery">
-    <h2>Project Gallery</h2>
-    <!-- Add images of completed storage buildings here -->
-  </section>
+    <!-- Fallback if PDF.js fails or JS is disabled -->
+    <object
+      data="storage-building-guide.pdf"
+      type="application/pdf"
+      width="100%"
+      height="600px"
+      aria‐label="Storage Buildings PDF"
+      style="margin-top: 1rem;"
+    >
+      <p>
+        Your browser does not support inline PDFs. You can
+        <a href="storage-building-guide.pdf" download>download our brochure here</a>.
+      </p>
+    </object>
 
-  <section class="testimonials">
-    <h2>What Our Customers Say</h2>
-    <!-- Add customer testimonials here -->
+    <!-- Download button for users who simply want the file -->
+    <p style="text-align: center; margin-top: 1rem;">
+      <a href="storage-building-guide.pdf" download class="btn">Download PDF</a>
+    </p>
   </section>
 
   <section id="contact" class="contact-form">
     <h2>Request a Quote</h2>
     <form>
       <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
+      <input type="text" id="name" name="name" required />
 
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email" required />
 
       <label for="message">Message:</label>
       <textarea id="message" name="message" required></textarea>
@@ -129,9 +142,55 @@
     </form>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer remains unchanged -->
   <footer>
-    <p>&copy; 2025 Travel Trailers Sales &amp; Service, Inc. | Last updated: April 30, 2025</p>
+    <p>&copy; 2025 Travel Trailers Sales & Service, Inc. | Last updated: April 30, 2025</p>
   </footer>
+
+  <!-- ========= PDF.js Scripts ========= -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+  <script>
+    // 1) Point to your PDF file
+    const PDF_URL = 'storage-building-guide.pdf';
+
+    // 2) Tell PDF.js where its worker is
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    // 3) When DOM is ready, fetch and render all pages
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('pdf‐viewer');
+      if (!container) return;
+
+      pdfjsLib
+        .getDocument(PDF_URL)
+        .promise.then(pdfDoc => {
+          // Render each page
+          for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+            pdfDoc.getPage(pageNum).then(page => {
+              const viewport = page.getViewport({ scale: 1.2 });
+              const canvas = document.createElement('canvas');
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              canvas.style.display = 'block';
+              canvas.style.margin = '0 auto 1rem';
+
+              const renderContext = {
+                canvasContext: canvas.getContext('2d'),
+                viewport: viewport
+              };
+              page.render(renderContext).promise.then(() => {
+                container.appendChild(canvas);
+              });
+            });
+          }
+        })
+        .catch(err => {
+          console.error('PDF loading error:', err);
+          // If PDF.js fails, the <object> fallback is still visible below
+        });
+    });
+  </script>
 </body>
 </html>
