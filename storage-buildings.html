@@ -101,89 +101,35 @@
   </section>
 
   <!-- ========= NEW: PDF Viewer Section ========= -->
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Storage Buildings | Travel Trailers Sales & Service</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- HERO SECTION -->
-  <header class="hero storage-hero">
-    <!-- Background image is handled via CSS -->
-  </header>
+  <section class="pdf‐section">
+    <h2>Download & View Our Storage Buildings Brochure</h2>
 
-  <!-- BUTTON: directly below the hero -->
-  <div class="quote-container">
-    <a href="#contact" class="btn">Request a Quote</a>
-  </div>
-
-  <!-- OVERVIEW SECTION -->
-  <section class="overview">
-    <h2>Our Storage Solutions</h2>
-    <p>
-      We offer a range of storage buildings designed to meet your specific needs.
-      Whether you're looking to store your RV, tools, or other equipment, our
-      buildings are built to last and can be customized to your preferences.
-    </p>
-  </section>
-
-  <!-- FEATURES SECTION -->
-  <section class="features">
-    <h2>Features &amp; Benefits</h2>
-    <ul>
-      <li>High-quality materials for durability</li>
-      <li>Customizable sizes and designs</li>
-      <li>Weather-resistant construction</li>
-      <li>Professional installation services</li>
-    </ul>
-  </section>
-
-  <!-- CUSTOMIZATION SECTION -->
-  <section class="customization">
-    <h2>Customization Options</h2>
-    <p>
-      Choose from various sizes, materials, colors, and additional features like
-      windows, doors, and insulation to create the perfect storage solution for
-      your needs.
-    </p>
-  </section>
-
-  <!-- PDF VIEWER SECTION -->
-  <section class="pdf-section">
-    <h2>Download &amp; View Our Storage Buildings Brochure</h2>
-
-    <!-- 1) Container where PDF.js will render each page in order -->
-    <div id="pdf-viewer" style="border: 1px solid #ccc; padding: 1rem;">
-      <!-- PDF.js will append <canvas> elements here -->
+    <!-- Container where PDF.js will render each page as a <canvas> -->
+    <div id="pdf‐viewer" style="border: 1px solid #ccc; padding: 1rem;">
+      <!-- Canvas elements go here dynamically via JS -->
     </div>
 
-    <!-- 2) Fallback <object> only if JS is disabled -->
-    <noscript>
-      <object
-        data="storage-buildings.pdf"
-        type="application/pdf"
-        width="100%"
-        height="600px"
-        aria-label="Storage Buildings PDF"
-        style="margin-top: 1rem;"
-      >
-        <p>
-          Your browser does not support inline PDFs. You can
-          <a href="storage-buildings.pdf" download>download our brochure here</a>.
-        </p>
-      </object>
-    </noscript>
+    <!-- Fallback if PDF.js fails or JS is disabled -->
+    <object
+      data="storage-building-guide.pdf"
+      type="application/pdf"
+      width="100%"
+      height="600px"
+      aria‐label="Storage Buildings PDF"
+      style="margin-top: 1rem;"
+    >
+      <p>
+        Your browser does not support inline PDFs. You can
+        <a href="storage-building-guide.pdf" download>download our brochure here</a>.
+      </p>
+    </object>
 
-    <!-- 3) Always offer a download link below, in case someone wants the file directly -->
+    <!-- Download button for users who simply want the file -->
     <p style="text-align: center; margin-top: 1rem;">
-      <a href="storage-buildings.pdf" download class="btn">Download PDF</a>
+      <a href="storage-building-guide.pdf" download class="btn">Download PDF</a>
     </p>
   </section>
 
-  <!-- CONTACT FORM SECTION -->
   <section id="contact" class="contact-form">
     <h2>Request a Quote</h2>
     <form>
@@ -196,60 +142,59 @@
       <label for="message">Message:</label>
       <textarea id="message" name="message" required></textarea>
 
-      <button type="submit" class="btn">Submit</button>
+      <button type="submit">Submit</button>
     </form>
   </section>
 
-  <!-- FOOTER -->
+  <!-- Footer remains unchanged -->
   <footer>
-    <p>&copy; 2025 Travel Trailers Sales &amp; Service, Inc. | Last updated: April 30, 2025</p>
+    <p>&copy; 2025 Travel Trailers Sales & Service, Inc. | Last updated: April 30, 2025</p>
   </footer>
 
-  <!-- PDF.js LIBRARIES -->
+  <!-- ========= PDF.js Scripts ========= -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
   <script>
-    (async () => {
-      // 1) URL of the PDF file
-      const PDF_URL = 'storage-buildings.pdf';
+    // 1) Point to your PDF file
+    const PDF_URL = 'storage-building-guide.pdf';
 
-      // 2) Tell PDF.js where its worker file lives
-      pdfjsLib.GlobalWorkerOptions.workerSrc =
-        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    // 2) Tell PDF.js where its worker is
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
-      // 3) Grab the container and load the PDF document
-      const container = document.getElementById('pdf-viewer');
+    // 3) When DOM is ready, fetch and render all pages
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('pdf‐viewer');
       if (!container) return;
 
-      try {
-        const pdfDoc = await pdfjsLib.getDocument(PDF_URL).promise;
+      pdfjsLib
+        .getDocument(PDF_URL)
+        .promise.then(pdfDoc => {
+          // Render each page
+          for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+            pdfDoc.getPage(pageNum).then(page => {
+              const viewport = page.getViewport({ scale: 1.2 });
+              const canvas = document.createElement('canvas');
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              canvas.style.display = 'block';
+              canvas.style.margin = '0 auto 1rem';
 
-        // 4) Render pages sequentially (1 → numPages) so they always appear in order
-        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-          const page = await pdfDoc.getPage(pageNum);
-          const viewport = page.getViewport({ scale: 1.2 });
-          const canvas = document.createElement('canvas');
-
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-          canvas.style.display = 'block';
-          canvas.style.margin = '0 auto 1rem';
-
-          const renderContext = {
-            canvasContext: canvas.getContext('2d'),
-            viewport: viewport
-          };
-
-          // Wait for the page to finish rendering before appending
-          await page.render(renderContext).promise;
-          container.appendChild(canvas);
-        }
-      } catch (err) {
-        console.error('PDF loading error:', err);
-        // If something goes wrong, the <noscript> fallback won’t show (since JS is enabled),
-        // but users still have the “Download PDF” button below.
-      }
-    })();
+              const renderContext = {
+                canvasContext: canvas.getContext('2d'),
+                viewport: viewport
+              };
+              page.render(renderContext).promise.then(() => {
+                container.appendChild(canvas);
+              });
+            });
+          }
+        })
+        .catch(err => {
+          console.error('PDF loading error:', err);
+          // If PDF.js fails, the <object> fallback is still visible below
+        });
+    });
   </script>
 </body>
 </html>
