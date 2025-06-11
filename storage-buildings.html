@@ -49,6 +49,28 @@
       border-radius: 4px;
       text-decoration: none;
       font-weight: bold;
+      cursor: pointer;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .contact-form label {
+      display: block;
+      margin-top: 1rem;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      box-sizing: border-box;
+    }
+    .contact-form button {
+      margin-top: 1rem;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -66,12 +88,10 @@
     </nav>
   </header>
 
-  <!-- Hero image / overlay remains as before -->
-  <header class="hero storage-hero">
-    <!-- Background image is handled via CSS -->
-  </header>
+  <!-- Hero image / overlay -->
+  <header class="hero storage-hero"></header>
 
-  <!-- BUTTON: directly below the hero -->
+  <!-- Request Quote Button -->
   <div class="quote-container">
     <a href="#contact" class="btn">Request a Quote</a>
   </div>
@@ -104,16 +124,14 @@
     </p>
   </section>
 
-  <!-- ========= NEW: PDF Viewer Section ========= -->
+  <!-- PDF Viewer Section -->
   <section class="pdf-section">
     <h2>Download &amp; View Our Storage Buildings Brochure</h2>
 
-    <!-- Container where PDF.js will render each page as a <canvas> -->
     <div id="pdf-viewer" style="border: 1px solid #ccc; padding: 1rem;">
       <!-- Canvas elements go here dynamically via JS -->
     </div>
 
-    <!-- Fallback if PDF.js fails or JS is disabled -->
     <object
       data="storage-building-guide.pdf"
       type="application/pdf"
@@ -128,7 +146,6 @@
       </p>
     </object>
 
-    <!-- Download button for users who simply want the file -->
     <p style="text-align: center; margin-top: 1rem;">
       <a href="storage-building-guide.pdf" download class="btn">Download PDF</a>
     </p>
@@ -137,16 +154,12 @@
   <section id="contact" class="contact-form">
     <h2>Request a Quote</h2>
 
-    <!-- INLINE form tag so attributes don’t bleed onto the page as text -->
-    <form name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <!-- honeypot, fully hidden -->
+    <form name="quote" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
       <div style="display:none;">
         <label>
           Don’t fill this out if you’re human: <input name="bot-field" />
         </label>
       </div>
-
-      <!-- tell Netlify which form this is -->
       <input type="hidden" name="form-name" value="quote" />
 
       <label for="name">Name:</label>
@@ -166,19 +179,24 @@
     <p>&copy; 2025 Travel Trailers Sales &amp; Service, Inc. | Last updated: April 30, 2025</p>
   </footer>
 
-  <!-- ========= PDF.js Scripts (updated) ========= -->
+  <!-- PDF.js Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
   <script>
-    const PDF_URL = 'storage-building-guide.pdf';
-
-    // Point PDF.js to its worker
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-
     document.addEventListener('DOMContentLoaded', async () => {
       const container = document.getElementById('pdf-viewer');
-      if (!container) return;
-
-      // Load the PDF document
-      const pdfDoc = await pdfjsLib.getDocument(PDF_URL).p_
+      const pdf = await pdfjsLib.getDocument('storage-building-guide.pdf').promise;
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: 1.2 });
+        const canvas = document.createElement('canvas');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        container.appendChild(canvas);
+      }
+    });
+  </script>
+</body>
+</html>
