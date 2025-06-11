@@ -134,38 +134,33 @@
     </p>
   </section>
 
-<section id="contact" class="contact-form">
-  <h2>Request a Quote</h2>
+  <section id="contact" class="contact-form">
+    <h2>Request a Quote</h2>
 
-  <form
-    name="quote"
-    method="POST"
-    data-netlify="true"
-    netlify-honeypot="bot-field"
-  >
-    <!-- honeypot, fully hidden -->
-    <div style="display:none;">
-      <label>
-        Don’t fill this out if you’re human: <input name="bot-field" />
-      </label>
-    </div>
+    <!-- INLINE form tag so attributes don’t bleed onto the page as text -->
+    <form name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <!-- honeypot, fully hidden -->
+      <div style="display:none;">
+        <label>
+          Don’t fill this out if you’re human: <input name="bot-field" />
+        </label>
+      </div>
 
-    <!-- tell Netlify which form this is -->
-    <input type="hidden" name="form-name" value="quote" />
+      <!-- tell Netlify which form this is -->
+      <input type="hidden" name="form-name" value="quote" />
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required />
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
 
-    <label for="message">Message:</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
 
-    <button type="submit" class="btn">Submit</button>
-  </form>
-</section>
-
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </section>
 
   <footer>
     <p>&copy; 2025 Travel Trailers Sales &amp; Service, Inc. | Last updated: April 30, 2025</p>
@@ -186,29 +181,4 @@
       if (!container) return;
 
       // Load the PDF document
-      const pdfDoc = await pdfjsLib.getDocument(PDF_URL).promise;
-
-      // Render pages one at a time, in order
-      for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-        const page = await pdfDoc.getPage(pageNum);
-        const viewport = page.getViewport({ scale: 1.2 });
-
-        // Create canvas for this page
-        const canvas = document.createElement('canvas');
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        canvas.style.display = 'block';
-        canvas.style.margin = '0 auto 1rem';
-
-        // Render & append in sequence
-        await page.render({
-          canvasContext: canvas.getContext('2d'),
-          viewport: viewport
-        }).promise;
-
-        container.appendChild(canvas);
-      }
-    });
-  </script>
-</body>
-</html>
+      const pdfDoc = await pdfjsLib.getDocument(PDF_URL).p_
