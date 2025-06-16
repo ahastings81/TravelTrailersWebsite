@@ -6,41 +6,33 @@
   <title>Storage Buildings | Travel Trailers Sales & Service</title>
 
   <link rel="stylesheet" href="style.css" />
-  <!-- Google Fonts for clean, modern typography -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Header styling with navigation */
     header {
-      background: #002244; /* Navy blue */
+      background: #002244;
       color: white;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-
-    /* Navigation links */
     nav a {
       color: white;
       text-decoration: none;
       margin: 0 1rem;
       font-weight: bold;
     }
-
-    /* PDF section */
     .pdf-section {
       max-width: 1000px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
-
     .pdf-section h2 {
       text-align: center;
       margin-bottom: 1rem;
       color: #002244;
     }
-
     .btn {
       background: #ffcc00;
       color: #000;
@@ -49,28 +41,6 @@
       border-radius: 4px;
       text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
-    }
-
-    .contact-form {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .contact-form label {
-      display: block;
-      margin-top: 1rem;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.25rem;
-      box-sizing: border-box;
-    }
-    .contact-form button {
-      margin-top: 1rem;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -88,10 +58,7 @@
     </nav>
   </header>
 
-  <!-- Hero image / overlay -->
   <header class="hero storage-hero"></header>
-
-  <!-- Request Quote Button -->
   <div class="quote-container">
     <a href="#contact" class="btn">Request a Quote</a>
   </div>
@@ -124,53 +91,43 @@
     </p>
   </section>
 
-  <!-- PDF Viewer Section -->
+  <!-- PDF Viewer #1 -->
   <section class="pdf-section">
     <h2>Download &amp; View Our Storage Buildings Brochure</h2>
-
-    <div id="pdf-viewer" style="border: 1px solid #ccc; padding: 1rem;">
-      <!-- Canvas elements go here dynamically via JS -->
-    </div>
-
-    <object
-      data="storage-building-guide.pdf"
-      type="application/pdf"
-      width="100%"
-      height="600px"
-      aria-label="Storage Buildings PDF"
-      style="margin-top: 1rem;"
-    >
-      <p>
-        Your browser does not support inline PDFs. You can
-        <a href="storage-building-guide.pdf" download>download our brochure here</a>.
-      </p>
+    <div id="pdf-viewer" style="border: 1px solid #ccc; padding: 1rem;"></div>
+    <object data="storage-building-guide.pdf" type="application/pdf" width="100%" height="600px" style="margin-top: 1rem;">
+      <p>Your browser does not support inline PDFs. <a href="storage-building-guide.pdf" download>Download brochure</a>.</p>
     </object>
-
     <p style="text-align: center; margin-top: 1rem;">
       <a href="storage-building-guide.pdf" download class="btn">Download PDF</a>
     </p>
   </section>
 
+  <!-- PDF Viewer #2 -->
+  <section class="pdf-section">
+    <h2>View Optional Upgrades &amp; Accessories</h2>
+    <div id="pdf-viewer-2" style="border: 1px solid #ccc; padding: 1rem;"></div>
+    <object data="storage-building-options.pdf" type="application/pdf" width="100%" height="600px" style="margin-top: 1rem;">
+      <p>Your browser does not support inline PDFs. <a href="storage-building-options.pdf" download>Download options guide</a>.</p>
+    </object>
+    <p style="text-align: center; margin-top: 1rem;">
+      <a href="storage-building-options.pdf" download class="btn">Download PDF</a>
+    </p>
+  </section>
+
   <section id="contact" class="contact-form">
     <h2>Request a Quote</h2>
-
     <form name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <div style="display:none;">
-        <label>
-          Don’t fill this out if you’re human: <input name="bot-field" />
-        </label>
+        <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
       </div>
       <input type="hidden" name="form-name" value="quote" />
-
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required />
-
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required />
-
       <label for="message">Message:</label>
       <textarea id="message" name="message" rows="5" required></textarea>
-
       <button type="submit" class="btn">Submit</button>
     </form>
   </section>
@@ -179,23 +136,42 @@
     <p>&copy; 2025 Travel Trailers Sales &amp; Service, Inc. | Last updated: April 30, 2025</p>
   </footer>
 
-  <!-- PDF.js Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
   <script>
+    const PDF_URL_1 = 'storage-building-guide.pdf';
+    const PDF_URL_2 = 'storage-building-options.pdf';
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-    document.addEventListener('DOMContentLoaded', async () => {
-      const container = document.getElementById('pdf-viewer');
-      const pdf = await pdfjsLib.getDocument('storage-building-guide.pdf').promise;
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
+
+    async function renderPDF(containerId, pdfUrl) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+
+      for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+        const page = await pdfDoc.getPage(pageNum);
         const viewport = page.getViewport({ scale: 1.2 });
+
         const canvas = document.createElement('canvas');
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        canvas.style.display = 'block';
+        canvas.style.margin = '0 auto 1rem';
+
+        await page.render({
+          canvasContext: canvas.getContext('2d'),
+          viewport: viewport
+        }).promise;
+
         container.appendChild(canvas);
       }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPDF('pdf-viewer', PDF_URL_1);
+      renderPDF('pdf-viewer-2', PDF_URL_2);
     });
   </script>
 </body>
