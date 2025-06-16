@@ -42,6 +42,11 @@
       text-decoration: none;
       font-weight: bold;
     }
+    #pdf-viewer-2 {
+      border: 2px dashed red;
+      min-height: 300px;
+      background: #fefefe;
+    }
   </style>
 </head>
 <body>
@@ -103,7 +108,7 @@
   <!-- PDF Viewer #2 -->
   <section class="pdf-section">
     <h2>View Optional Upgrades &amp; Accessories</h2>
-    <div id="pdf-viewer-2" style="border: 1px solid #ccc; padding: 1rem;"></div>
+    <div id="pdf-viewer-2"></div>
     <p style="text-align: center; margin-top: 1rem;">
       <a href="storage-buildings-options.pdf" download class="btn">Download PDF</a>
     </p>
@@ -142,7 +147,14 @@
       const container = document.getElementById(containerId);
       if (!container) return;
 
-      const pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+      let pdfDoc;
+      try {
+        pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+      } catch (error) {
+        container.innerHTML = `<p style="color:red;font-weight:bold;">Failed to load PDF: ${pdfUrl}</p>`;
+        console.error('PDF load error:', error);
+        return;
+      }
 
       for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
         const page = await pdfDoc.getPage(pageNum);
