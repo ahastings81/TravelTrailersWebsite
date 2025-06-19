@@ -43,15 +43,18 @@
       text-decoration: none;
       font-weight: bold;
     }
+    #pdf-viewer, #pdf-viewer-2 {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1rem;
+      background: #fefefe;
+    }
     #pdf-viewer canvas,
     #pdf-viewer-2 canvas {
       max-width: 100%;
       height: auto;
       display: block;
       margin: 0 auto 1rem;
-    }
-
-
     }
   </style>
 </head>
@@ -105,7 +108,7 @@
   <!-- PDF Viewer #1 -->
   <section class="pdf-section">
     <h2>Download &amp; View Our Storage Buildings Brochure</h2>
-    <div id="pdf-viewer" style="border: 1px solid #ccc; padding: 1rem;"></div>
+    <div id="pdf-viewer"></div>
     <p style="text-align: center; margin-top: 1rem;">
       <a href="storage-building-guide.pdf" download class="btn">Download PDF</a>
     </p>
@@ -120,31 +123,27 @@
     </p>
   </section>
 
+  <!-- ✅ Cleaned Quote Form -->
   <section id="contact" class="contact-form">
-  <h2>Request a Quote</h2>
-  <form name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-    <!-- Honeypot spam trap -->
-    <div style="display:none;">
-      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-    </div>
+    <h2>Request a Quote</h2>
+    <form name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <div style="display:none;">
+        <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+      </div>
+      <input type="hidden" name="form-name" value="quote" />
 
-    <!-- Netlify form identifier -->
-    <input type="hidden" name="form-name" value="quote" />
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
 
-    <!-- Actual form fields -->
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required />
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
 
-    <label for="message">Message:</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
-
-    <button type="submit" class="btn">Submit</button>
-  </form>
-</section>
-
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </section>
 
   <footer>
     <p>&copy; 2025 Travel Trailers Sales &amp; Service, Inc. | Last updated: April 30, 2025</p>
@@ -178,8 +177,6 @@
         const canvas = document.createElement('canvas');
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-        canvas.style.display = 'block';
-        canvas.style.margin = '0 auto 1rem';
 
         await page.render({
           canvasContext: canvas.getContext('2d'),
